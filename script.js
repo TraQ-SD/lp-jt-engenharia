@@ -319,16 +319,10 @@ async function handleFormSubmit(e) {
     dataLayer.push({ event: 'generate_lead', form_name: form.getAttribute('name') || 'contato', method: 'netlify_form' });
   }
 
-  // Envio ao Netlify Forms (fire-and-forget — nao bloqueia o redirect)
-  try {
-    fetch(window.location.pathname, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form)).toString()
-    });
-  } catch (_) {
-    // Silencioso — o importante e o redirect
-  }
+  // Envio ao Netlify Forms via sendBeacon (sobrevive ao redirect)
+  const formBody = new URLSearchParams(new FormData(form)).toString();
+  const blob = new Blob([formBody], { type: 'application/x-www-form-urlencoded' });
+  navigator.sendBeacon(window.location.pathname, blob);
 
   // Redirect para WhatsApp (acontece SEMPRE apos validacao)
   const redirectWhatsApp = "554784566163";
