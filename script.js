@@ -416,7 +416,7 @@ function closeModal(modal) {
    ========================================== */
 function initUTMs() {
   const urlParams = new URLSearchParams(window.location.search);
-  const utmFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  const utmFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'];
 
   document.querySelectorAll('form[data-form]').forEach(form => {
     utmFields.forEach(field => {
