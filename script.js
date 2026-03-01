@@ -299,7 +299,6 @@ async function handleFormSubmit(e) {
 
   // Captura dados ANTES do envio
   const nome = form.querySelector('[name="nome"]')?.value || '';
-  const email = form.querySelector('[name="email"]')?.value || '';
 
   // Telefone internacional
   const phone = form.querySelector('input[type="tel"]');
@@ -307,60 +306,44 @@ async function handleFormSubmit(e) {
     phone.value = phone._iti.getNumber();
   }
 
-  // Envio
+  // Estado do botao
   const originalText = btn.textContent;
   btn.disabled = true;
   btn.textContent = 'Enviando...';
 
+  // Tracking (Meta Pixel + GTM)
+  if (typeof fbq === 'function') {
+    fbq('track', 'Lead');
+  }
+  if (typeof dataLayer !== 'undefined') {
+    dataLayer.push({ event: 'generate_lead', form_name: form.getAttribute('name') || 'contato', method: 'netlify_form' });
+  }
+
+  // Envio ao Netlify Forms (fire-and-forget — nao bloqueia o redirect)
   try {
-    const res = await fetch(form.getAttribute('action') || window.location.pathname, {
+    fetch(window.location.pathname, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams(new FormData(form)).toString()
     });
-
-    if (res.ok) {
-      // Meta Pixel
-      if (typeof fbq === 'function') {
-        fbq('track', 'Lead');
-      }
-
-      // GTM dataLayer
-      if (typeof dataLayer !== 'undefined') {
-        dataLayer.push({ event: 'generate_lead', form_name: form.getAttribute('name') || 'contato', method: 'netlify_form' });
-      }
-
-      // Redirect com parametros para WhatsApp
-      const redirectWhatsApp = "554784566163"; // Número definido
-
-      const primeiroNome = nome.trim() ? nome.trim().split(' ')[0] : 'Cliente';
-      const selectInteresse = form.querySelector('[name="interesse"]');
-      const textInteresse = selectInteresse ? selectInteresse.value : 'serviços elétricos';
-
-      const mensagemWa = `Olá, me chamo ${primeiroNome} e gostaria de um orçamento para ${textInteresse}`;
-
-      const whatsappUrl = new URL(`https://api.whatsapp.com/send`);
-      whatsappUrl.searchParams.set('phone', redirectWhatsApp);
-      whatsappUrl.searchParams.set('text', mensagemWa);
-
-      // Ainda se quiser passar UTMs adiante para rastreio se o wa permitir
-      // (Algumas pessoas anexam links, mas aqui focaremos na URL base).
-
-      window.location.href = whatsappUrl.toString();
-      return;
-
-      showFeedback(feedback, 'success', 'Mensagem enviada com sucesso!');
-      form.reset();
-      if (phone && phone._iti) phone._iti.setNumber('');
-    } else {
-      throw new Error('Erro');
-    }
-  } catch {
-    showFeedback(feedback, 'error', 'Erro ao enviar. Tente novamente.');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = originalText;
+  } catch (_) {
+    // Silencioso — o importante e o redirect
   }
+
+  // Redirect para WhatsApp (acontece SEMPRE apos validacao)
+  const redirectWhatsApp = "554784566163";
+
+  const primeiroNome = nome.trim() ? nome.trim().split(' ')[0] : 'Cliente';
+  const selectInteresse = form.querySelector('[name="interesse"]');
+  const textInteresse = selectInteresse ? selectInteresse.value : 'serviços elétricos';
+
+  const mensagemWa = `Olá, me chamo ${primeiroNome} e gostaria de um orçamento para ${textInteresse}`;
+
+  const whatsappUrl = new URL('https://api.whatsapp.com/send');
+  whatsappUrl.searchParams.set('phone', redirectWhatsApp);
+  whatsappUrl.searchParams.set('text', mensagemWa);
+
+  window.location.href = whatsappUrl.toString();
 }
 
 function showFeedback(el, type, msg) {
