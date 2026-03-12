@@ -283,12 +283,9 @@ async function handleFormSubmit(e) {
       valid = false;
     }
 
-    if (field.type === 'tel') {
-      const iti = field._iti;
-      if (iti && !iti.isValidNumber()) {
-        field.classList.add('error');
-        valid = false;
-      }
+    if (field.type === 'tel' && field.value && !isValidBrazilianPhone(field.value)) {
+      field.classList.add('error');
+      valid = false;
     }
   });
 
@@ -300,11 +297,9 @@ async function handleFormSubmit(e) {
   // Captura dados ANTES do envio
   const nome = form.querySelector('[name="nome"]')?.value || '';
 
-  // Telefone internacional
+  // Telefone - adiciona código do Brasil para WhatsApp
   const phone = form.querySelector('input[type="tel"]');
-  if (phone && phone._iti) {
-    phone.value = phone._iti.getNumber();
-  }
+  const phoneDigits = phone ? phone.value.replace(/\D/g, '') : '';
 
   // Estado do botao
   const originalText = btn.textContent;
@@ -351,21 +346,38 @@ function showFeedback(el, type, msg) {
 }
 
 /* ==========================================
-   TELEFONE INTERNACIONAL
+   MASCARA TELEFONE BRASIL
    ========================================== */
 
 function initPhoneInput() {
-  if (typeof intlTelInput === 'undefined') return;
-
   document.querySelectorAll('input[type="tel"]').forEach(input => {
-    input._iti = intlTelInput(input, {
-      initialCountry: 'br',
-      preferredCountries: ['br', 'us', 'pt'],
-      separateDialCode: true,
-      strictMode: true,
-      loadUtilsOnInit: 'https://cdn.jsdelivr.net/npm/intl-tel-input@24.6.0/build/js/utils.js'
+    // Placeholder
+    input.placeholder = '(00) 00000-0000';
+
+    // Aplica máscara ao digitar
+    input.addEventListener('input', (e) => {
+      let value = e.target.value.replace(/\D/g, '');
+
+      // Limita a 11 dígitos
+      if (value.length > 11) value = value.slice(0, 11);
+
+      // Aplica máscara
+      if (value.length <= 10) {
+        // Fixo: (00) 0000-0000
+        value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+      } else {
+        // Móvel: (00) 00000-0000
+        value = value.replace(/^(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+      }
+
+      e.target.value = value.replace(/-$/, '');
     });
   });
+}
+
+function isValidBrazilianPhone(phone) {
+  const digits = phone.replace(/\D/g, '');
+  return digits.length >= 10 && digits.length <= 11;
 }
 
 /* ==========================================
