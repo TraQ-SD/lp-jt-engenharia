@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 200" fill="none">
+  <!-- J letter -->
+  <path d="M30 18h65v30H65v72c0 22-10 38-35 38C8 158 0 142 0 120h30c0 10 4 16 12 16s12-6 12-16V18z" fill="#FFFFFF"/>
+  <!-- Lightning bolt between J and T -->
+  <path d="M148 0l-45 90h32l-18 110 60-115h-34L170 0z" fill="#F5C518"/>
+  <!-- T letter -->
+  <path d="M195 18h130v30h-48v110h-34V48h-48V18z" fill="#FFFFFF"/>
+  <!-- ENGENHARIA ELETRICA text -->
+  <text x="195" y="190" font-family="'Arial Black','Inter Tight',sans-serif" font-weight="900" font-size="26" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">ENGENHARIA ELÉTRICA</text>
+</svg>
