@@ -67,8 +67,10 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-  <!-- Preload LCP image -->
-  <link rel="preload" as="image" href="/.netlify/images?url=/images/tecnico-painel.jpg&w=1920&q=80">
+  <!-- Preload LCP image (responsive) -->
+  <link rel="preload" as="image" href="/.netlify/images?url=/images/tecnico-painel.jpg&w=768&q=75"
+    imagesrcset="/.netlify/images?url=/images/tecnico-painel.jpg&w=768&q=75 768w, /.netlify/images?url=/images/tecnico-painel.jpg&w=1200&q=80 1200w, /.netlify/images?url=/images/tecnico-painel.jpg&w=1920&q=80 1920w"
+    imagesizes="100vw">
 
   <!-- Fonts - Preconnect + Non-blocking load -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,7 +110,9 @@
          ======================================== -->
     <section class="hero" id="hero">
       <div class="hero__bg">
-        <img src="/.netlify/images?url=/images/tecnico-painel.jpg&w=1920&q=80"
+        <img src="/.netlify/images?url=/images/tecnico-painel.jpg&w=1200&q=80"
+          srcset="/.netlify/images?url=/images/tecnico-painel.jpg&w=768&q=75 768w, /.netlify/images?url=/images/tecnico-painel.jpg&w=1200&q=80 1200w, /.netlify/images?url=/images/tecnico-painel.jpg&w=1920&q=80 1920w"
+          sizes="100vw"
           alt="Tecnico da JT Engenharia Elétrica trabalhando em painel eletrico industrial" width="1920" height="1080"
           fetchpriority="high">
       </div>
@@ -450,7 +454,7 @@
                         d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.748-9.57 9-10.609L9.995 5.151C7.563 6.068 6 8.789 6 11h4v10H0z" />
                     </svg>
                   </div>
-                  <div class="testimonial-card__stars" aria-label="5 de 5 estrelas">
+                  <div class="testimonial-card__stars" role="img" aria-label="5 de 5 estrelas">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5C518">
                       <polygon
                         points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -491,7 +495,7 @@
                         d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.748-9.57 9-10.609L9.995 5.151C7.563 6.068 6 8.789 6 11h4v10H0z" />
                     </svg>
                   </div>
-                  <div class="testimonial-card__stars" aria-label="5 de 5 estrelas">
+                  <div class="testimonial-card__stars" role="img" aria-label="5 de 5 estrelas">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5C518">
                       <polygon
                         points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -532,7 +536,7 @@
                         d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.748-9.57 9-10.609L9.995 5.151C7.563 6.068 6 8.789 6 11h4v10H0z" />
                     </svg>
                   </div>
-                  <div class="testimonial-card__stars" aria-label="5 de 5 estrelas">
+                  <div class="testimonial-card__stars" role="img" aria-label="5 de 5 estrelas">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5C518">
                       <polygon
                         points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
