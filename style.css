@@ -1460,7 +1460,7 @@ ol {
 .footer__links {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 4px;
 }
 
 .footer__link {
@@ -1468,6 +1468,9 @@ ol {
   color: rgba(255, 255, 255, 0.7);
   transition: color 0.2s ease, transform 0.2s ease;
   display: inline-block;
+  padding: 10px 0;
+  min-height: 44px;
+  line-height: 24px;
 }
 
 .footer__link:hover {
@@ -1501,12 +1504,18 @@ ol {
 .footer__social {
   margin-top: 20px;
   display: flex;
-  gap: 16px;
+  gap: 8px;
 }
 
 .footer__social-link {
   color: rgba(255, 255, 255, 0.7);
   transition: color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
 }
 
 .footer__social-link:hover {
