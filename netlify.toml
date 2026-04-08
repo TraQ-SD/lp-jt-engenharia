@@ -11,13 +11,11 @@
 [images]
   remote_images = ["https://.*"]
 
-# Redirect da home para a pagina principal
-# Adicionado automaticamente por /gerar-copy ao criar a primeira pagina
-# [[redirects]]
-#   from = "/"
-#   to = "/nome-da-pagina/"
-#   status = 302
-#   force = true
+[[redirects]]
+  from = "/"
+  to = "/v2/"
+  status = 302
+  force = true
 
 # Redirect www → apex
 [[redirects]]
