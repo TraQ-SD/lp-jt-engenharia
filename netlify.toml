@@ -21,8 +21,8 @@
 
 # Redirect www → apex
 [[redirects]]
-  from = "https://www.example.com/*"
-  to = "https://example.com/:splat"
+  from = "https://www.jtengenhariaeletrica.com.br/*"
+  to = "https://jtengenhariaeletrica.com.br/:splat"
   status = 301
   force = true
 
