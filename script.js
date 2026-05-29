@@ -363,6 +363,11 @@ function initPhoneInput() {
     input.addEventListener('input', (e) => {
       let value = e.target.value.replace(/\D/g, '');
 
+      // Se começar com 55 e tiver mais de 11 dígitos (DDI Brasil + DDD + Telefone), remove o 55
+      if (value.startsWith('55') && value.length > 11) {
+        value = value.slice(2);
+      }
+
       // Limita a 11 dígitos
       if (value.length > 11) value = value.slice(0, 11);
 
