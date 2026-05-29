@@ -319,12 +319,17 @@ async function handleFormSubmit(e) {
   const blob = new Blob([formBody], { type: 'application/x-www-form-urlencoded' });
   navigator.sendBeacon(window.location.pathname, blob);
 
-  // Redirect para WhatsApp (acontece SEMPRE apos validacao)
-  const redirectWhatsApp = "5534999370130";
-
   const primeiroNome = nome.trim() ? nome.trim().split(' ')[0] : 'Cliente';
   const selectInteresse = form.querySelector('[name="interesse"]');
   const textInteresse = selectInteresse ? selectInteresse.value : 'serviços elétricos';
+
+  if (textInteresse === 'Busca por Vagas' || textInteresse === 'Residencial') {
+    window.location.href = 'https://jtengenhariaeletrica.com.br/pagina-obrigado-b/';
+    return;
+  }
+
+  // Redirect para WhatsApp (acontece SEMPRE apos validacao)
+  const redirectWhatsApp = "5534999370130";
 
   const mensagemWa = `Olá, me chamo ${primeiroNome} e gostaria de um orçamento para ${textInteresse}`;
 
