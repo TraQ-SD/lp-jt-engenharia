@@ -1,7 +1,7 @@
 {
 	"geolocation": {
 		"data": {
-			"city": "Blumenau",
+			"city": "Florianópolis",
 			"country": {
 				"code": "BR",
 				"name": "Brazil"
@@ -11,11 +11,11 @@
 				"name": "Santa Catarina"
 			},
 			"timezone": "America/Sao_Paulo",
-			"latitude": -26.8766,
-			"longitude": -49.0969,
-			"postalCode": "89000"
+			"latitude": -27.6168,
+			"longitude": -48.4997,
+			"postalCode": "88000"
 		},
-		"timestamp": 1775664277481
+		"timestamp": 1780072114235
 	},
 	"siteId": "fa28cbc2-9a88-4dd1-8a66-32d7a5d96de3"
 }
